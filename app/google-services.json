@@ -1,0 +1,44 @@
+{
+  "project_info": {
+    "project_number": "1009200658595",
+    "firebase_url": "https://toletdhaka-c9c35.firebaseio.com",
+    "project_id": "toletdhaka-c9c35",
+    "storage_bucket": "toletdhaka-c9c35.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1009200658595:android:e755d440df6e02dd",
+        "android_client_info": {
+          "package_name": "com.nsu.to_letdhaka"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1009200658595-ti43sivbvhscqtsr7c820rtbsgrbjdvk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.nsu.to_letdhaka",
+            "certificate_hash": "565d0662ea4ccf34a2ff831b5ad0276be0884c9c"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBRsMpfutaOug1ZPhD61JaIN3UMv6pdy6g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1009200658595-6eikcch8av3sq00cstorbcj520dmgo75.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
