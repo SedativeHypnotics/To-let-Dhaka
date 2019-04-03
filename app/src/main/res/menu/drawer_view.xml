@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/profile"
+            android:icon="@drawable/round_person"
+            android:title="@string/profile"/>
+        <item android:id="@+id/posts"
+            android:icon="@android:drawable/ic_menu_agenda"
+            android:title="@string/posts"/>
+        <item android:id="@+id/post_ad"
+            android:icon="@android:drawable/ic_input_add"
+            android:title="@string/profile"/>
+    </group>
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/log_out"
+            android:icon="@drawable/logout"
+            android:title="@string/profile"/>
+    </group>
+
+</menu>

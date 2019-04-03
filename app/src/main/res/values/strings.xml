@@ -7,4 +7,6 @@
     <string name="storage_removed">Storage was removed or unmounted.</string>
     <string name="error_selecting_file">Error selecting File</string>
     <string name="image">image</string>
+    <string name="profile">Profile</string>
+    <string name="posts">Your Posts</string>
 </resources>

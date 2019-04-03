@@ -10,19 +10,27 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".Activities.MyAdsActivity"
+        <activity android:name=".Activities.AdListActivity"></activity>
+        <activity
+            android:name=".Activities.MyAdsActivity"
             tools:ignore="InnerclassSeparator" />
-        <activity android:name=".Activities.AdDetailsActivity"
+        <activity
+            android:name=".Activities.AdDetailsActivity"
             tools:ignore="InnerclassSeparator" />
-        <activity android:name=".Activities.MyProfileActivity"
+        <activity
+            android:name=".Activities.MyProfileActivity"
             tools:ignore="InnerclassSeparator" />
-        <activity android:name=".Activities.LogInActivity"
+        <activity
+            android:name=".Activities.LogInActivity"
             tools:ignore="InnerclassSeparator" />
-        <activity android:name=".Activities.SignUpActivity"
+        <activity
+            android:name=".Activities.SignUpActivity"
             tools:ignore="InnerclassSeparator" />
-        <activity android:name=".Activities.MainActivity"
+        <activity
+            android:name=".Activities.MainActivity"
             tools:ignore="InnerclassSeparator" />
-        <activity android:name=".Utils.FileChooserLibrary.FileChooserActivity"
+        <activity
+            android:name=".Utils.FileChooserLibrary.FileChooserActivity"
             tools:ignore="InnerclassSeparator" />
         <activity
             android:name=".Activities.SplashActivity"
@@ -34,6 +42,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <provider
             android:name=".Utils.FileChooserLibrary.LocalStorageProvider"
             android:authorities="com.nsu.localstorage.documents"
