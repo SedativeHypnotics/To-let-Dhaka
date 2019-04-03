@@ -4,22 +4,44 @@
     package="com.nsu.to_letdhaka">
 
     <application
-        android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:ignore="GoogleAppIndexingWarning">
+        tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+        <activity android:name=".Activities.MyAdsActivity"
+            tools:ignore="InnerclassSeparator" />
+        <activity android:name=".Activities.AdDetailsActivity"
+            tools:ignore="InnerclassSeparator" />
+        <activity android:name=".Activities.MyProfileActivity"
+            tools:ignore="InnerclassSeparator" />
+        <activity android:name=".Activities.LogInActivity"
+            tools:ignore="InnerclassSeparator" />
+        <activity android:name=".Activities.SignUpActivity"
+            tools:ignore="InnerclassSeparator" />
+        <activity android:name=".Activities.MainActivity"
+            tools:ignore="InnerclassSeparator" />
+        <activity android:name=".Utils.FileChooserLibrary.FileChooserActivity"
+            tools:ignore="InnerclassSeparator" />
         <activity
-            android:name=".MainActivity"
-            android:theme="@style/SplashTheme">
+            android:name=".Activities.SplashActivity"
+            android:theme="@style/SplashTheme"
+            tools:ignore="InnerclassSeparator">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <provider
+            android:name=".Utils.FileChooserLibrary.LocalStorageProvider"
+            android:authorities="com.nsu.localstorage.documents"
+            android:enabled="@bool/use_provider"
+            android:exported="true"
+            android:grantUriPermissions="true"
+            android:permission="android.permission.MANAGE_DOCUMENTS"
+            tools:ignore="InnerclassSeparator" />
     </application>
 
 </manifest>
