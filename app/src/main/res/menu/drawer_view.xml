@@ -14,7 +14,7 @@
     <group android:checkableBehavior="single">
         <item android:id="@+id/log_out"
             android:icon="@drawable/logout"
-            android:title="@string/profile"/>
+            android:title="@string/logout"/>
     </group>
 
 </menu>

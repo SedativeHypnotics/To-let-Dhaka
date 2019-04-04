@@ -3,11 +3,18 @@ package com.nsu.to_letdhaka.Activities;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.nsu.to_letdhaka.R;
 import com.nsu.to_letdhaka.Utils.FileChooserLibrary.FileUtils;
@@ -19,6 +26,10 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton subletButton;
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
+    private ActionBarDrawerToggle drawerToggle;
+    private DrawerLayout mDrawer;
+    private Toolbar toolbar;
+    private NavigationView nvDrawer;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -27,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
         bindWidgets();
         bindListeners();
+        setupDrawerContent(nvDrawer);
     }
 
     private void bindListeners() {
@@ -72,11 +84,75 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void bindWidgets() {
+    	toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        mDrawer = findViewById(R.id.drawer_layout);
+        nvDrawer = findViewById(R.id.nvView);
+        drawerToggle = new ActionBarDrawerToggle(this, mDrawer,toolbar ,  R.string.drawer_open, R.string.drawer_close) {
+	        /** Called when a drawer has settled in a completely closed state. */
+	        public void onDrawerClosed(View view) {
+	        super.onDrawerClosed(view);
+	    } 
+	        /** Called when a drawer has settled in a completely open state. */
+	        public void onDrawerOpened(View drawerView) {
+	        super.onDrawerOpened(drawerView);
+	    } 
+        }; 
+        mDrawer.setDrawerListener(drawerToggle);
+	    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true); 
+	    drawerToggle.syncState();
         messButton = findViewById(R.id.mess);
         hostelButton = findViewById(R.id.hostel);
         flatButton = findViewById(R.id.flat);
         subletButton = findViewById(R.id.sub_let);
         sharedPreferences = getPreferences(Context.MODE_PRIVATE);
+    }
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // The action bar home/up action should open or close the drawer.
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                mDrawer.openDrawer(GravityCompat.START);
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+    
+    private void setupDrawerContent(NavigationView navigationView) {
+        navigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                        selectDrawerItem(menuItem);
+                        return true;
+                    }
+                });
+    }
+    
+    public void selectDrawerItem(MenuItem menuItem) {
+        // Create a new fragment and specify the fragment to show based on nav item clicked
+        Class fragmentClass;
+        switch(menuItem.getItemId()) {
+            case R.id.profile:
+                Toast.makeText(MainActivity.this,"profile",Toast.LENGTH_LONG).show();
+                break;
+            case R.id.posts:
+                Toast.makeText(MainActivity.this,"posts",Toast.LENGTH_LONG).show();
+                break;
+            case R.id.post_ad:
+                Toast.makeText(MainActivity.this,"post ad",Toast.LENGTH_LONG).show();
+                break;
+            case R.id.log_out:
+                Toast.makeText(MainActivity.this,"log out",Toast.LENGTH_LONG).show();
+                break;
+            default:
+                Toast.makeText(MainActivity.this,"Nothing",Toast.LENGTH_LONG).show();
+        }
+        // Close the navigation drawer
+        mDrawer.closeDrawers();
     }
 
 }

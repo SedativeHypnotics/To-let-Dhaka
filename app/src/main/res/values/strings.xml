@@ -9,4 +9,7 @@
     <string name="image">image</string>
     <string name="profile">Profile</string>
     <string name="posts">Your Posts</string>
+    <string name="drawer_open">open</string>
+    <string name="drawer_close">close</string>
+    <string name="logout">Log out</string>
 </resources>
