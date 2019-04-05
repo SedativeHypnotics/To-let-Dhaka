@@ -10,7 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".Activities.AdListActivity"></activity>
+        <activity android:name=".Activities.PostAdActivity"></activity>
+        <activity
+            android:name=".Activities.AdListActivity"
+            tools:ignore="InnerclassSeparator" />
         <activity
             android:name=".Activities.MyAdsActivity"
             tools:ignore="InnerclassSeparator" />
@@ -28,8 +31,8 @@
             tools:ignore="InnerclassSeparator" />
         <activity
             android:name=".Activities.MainActivity"
-            tools:ignore="InnerclassSeparator"
-            android:theme="@style/NoBar" />
+            android:theme="@style/NoBar"
+            tools:ignore="InnerclassSeparator" />
         <activity
             android:name=".Utils.FileChooserLibrary.FileChooserActivity"
             tools:ignore="InnerclassSeparator" />

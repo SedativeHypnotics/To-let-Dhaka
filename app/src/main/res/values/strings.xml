@@ -12,4 +12,29 @@
     <string name="drawer_open">open</string>
     <string name="drawer_close">close</string>
     <string name="logout">Log out</string>
+    <string-array name="category">
+        <item>Mess</item>
+        <item>Hostel</item>
+        <item>Flat</item>
+        <item>Sub-Let</item>
+    </string-array>
+    <string-array name="room_for">
+        <item>Male</item>
+        <item>Female</item>
+        <item>Family</item>
+    </string-array>
+    <string-array name="months">
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
+    </string-array>
 </resources>

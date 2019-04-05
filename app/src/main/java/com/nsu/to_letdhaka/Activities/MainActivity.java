@@ -1,8 +1,10 @@
 package com.nsu.to_letdhaka.Activities;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -13,11 +15,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.nsu.to_letdhaka.R;
-import com.nsu.to_letdhaka.Utils.FileChooserLibrary.FileUtils;
+
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
     private ImageButton messButton;
@@ -26,10 +30,13 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton subletButton;
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
+    @SuppressWarnings("FieldCanBeLocal")
     private ActionBarDrawerToggle drawerToggle;
     private DrawerLayout mDrawer;
+    @SuppressWarnings("FieldCanBeLocal")
     private Toolbar toolbar;
     private NavigationView nvDrawer;
+    private FirebaseUser firebaseUser;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void bindListeners() {
         messButton.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("ApplySharedPref")
             @Override
             public void onClick(View view) {
                 editor = sharedPreferences.edit();
@@ -53,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         hostelButton.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("ApplySharedPref")
             @Override
             public void onClick(View view) {
                 editor = sharedPreferences.edit();
@@ -63,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         flatButton.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("ApplySharedPref")
             @Override
             public void onClick(View view) {
                 editor = sharedPreferences.edit();
@@ -73,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         subletButton.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("ApplySharedPref")
             @Override
             public void onClick(View view) {
                 editor = sharedPreferences.edit();
@@ -97,9 +108,10 @@ public class MainActivity extends AppCompatActivity {
 	        public void onDrawerOpened(View drawerView) {
 	        super.onDrawerOpened(drawerView);
 	    } 
-        }; 
+        };
+        //noinspection deprecation
         mDrawer.setDrawerListener(drawerToggle);
-	    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+	    Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true); 
 	    drawerToggle.syncState();
         messButton = findViewById(R.id.mess);
@@ -107,6 +119,7 @@ public class MainActivity extends AppCompatActivity {
         flatButton = findViewById(R.id.flat);
         subletButton = findViewById(R.id.sub_let);
         sharedPreferences = getPreferences(Context.MODE_PRIVATE);
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
     }
     
     @Override
@@ -125,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
-                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                         selectDrawerItem(menuItem);
                         return true;
                     }
@@ -134,22 +147,41 @@ public class MainActivity extends AppCompatActivity {
     
     public void selectDrawerItem(MenuItem menuItem) {
         // Create a new fragment and specify the fragment to show based on nav item clicked
-        Class fragmentClass;
         switch(menuItem.getItemId()) {
             case R.id.profile:
-                Toast.makeText(MainActivity.this,"profile",Toast.LENGTH_LONG).show();
+                if(firebaseUser != null) {
+                    startActivity(new Intent(MainActivity.this, MyProfileActivity.class));
+                }
+                else{
+                    Toast.makeText(MainActivity.this,"You are not logged in!",Toast.LENGTH_LONG).show();
+                }
                 break;
             case R.id.posts:
-                Toast.makeText(MainActivity.this,"posts",Toast.LENGTH_LONG).show();
+                if(firebaseUser != null){
+                    startActivity(new Intent(MainActivity.this, MyAdsActivity.class));
+                }
+                else{
+                    startActivity(new Intent(MainActivity.this,LogInActivity.class).putExtra("activity","posts"));
+                }
                 break;
             case R.id.post_ad:
-                Toast.makeText(MainActivity.this,"post ad",Toast.LENGTH_LONG).show();
+                if(firebaseUser != null){
+                    startActivity(new Intent(MainActivity.this, PostAdActivity.class));
+                }
+                else{
+                    startActivity(new Intent(MainActivity.this,LogInActivity.class).putExtra("activity","post_ad"));
+                }
                 break;
             case R.id.log_out:
-                Toast.makeText(MainActivity.this,"log out",Toast.LENGTH_LONG).show();
+                if(firebaseUser != null) {
+                    FirebaseAuth.getInstance().signOut();
+                    Toast.makeText(MainActivity.this, "log out", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    Toast.makeText(MainActivity.this,"You are not logged in!",Toast.LENGTH_LONG).show();
+                }
                 break;
             default:
-                Toast.makeText(MainActivity.this,"Nothing",Toast.LENGTH_LONG).show();
         }
         // Close the navigation drawer
         mDrawer.closeDrawers();

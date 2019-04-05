@@ -1,9 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.AdDetailsActivity">
+    tools:context=".Activities.AdDetailsActivity"
+    android:orientation="vertical"
+    android:weightSum="1.0">
+    <ImageView
+        android:id="@+id/image_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:src="@mipmap/ic_launcher"
+        tools:ignore="ContentDescription" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:weightSum="3.0"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/month_view"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.0"
+                android:gravity="center"
+                android:text="@string/app_name"
+                android:textStyle="bold"
+                android:background="#EC7711"
+                android:textColor="@color/white"
+                android:textSize="15sp"/>
+            <TextView
+                android:id="@+id/rent_view"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.0"
+                android:gravity="center"
+                android:text="@string/app_name"
+                android:textStyle="bold"
+                android:background="#32B636"
+                android:textColor="@color/white"
+                android:textSize="15sp"/>
+            <TextView
+                android:id="@+id/category_view"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.0"
+                android:gravity="center"
+                android:text="@string/app_name"
+                android:textStyle="bold"
+                android:background="#2196F3"
+                android:textColor="@color/white"
+                android:textSize="15sp"/>
 
-</android.support.constraint.ConstraintLayout>
+        </LinearLayout>
+        <TextView
+            android:id="@+id/contact_no_view"
+            android:text="@string/app_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="40dp"
+            android:paddingTop="10dp"
+            android:paddingStart="15dp"
+            android:textSize="25sp"
+            tools:ignore="RtlSymmetry"
+            android:textColor="@color/black"
+            android:drawableStart="@android:drawable/ic_menu_call"
+            android:drawablePadding="10dp"/>
+        <TextView
+            android:id="@+id/address_view"
+            android:text="@string/app_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="40dp"
+            android:paddingTop="10dp"
+            android:paddingStart="15dp"
+            android:textSize="25sp"
+            tools:ignore="RtlSymmetry"
+            android:textColor="@color/black"
+            android:drawableStart="@android:drawable/ic_dialog_map"
+            android:drawablePadding="10dp"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>
