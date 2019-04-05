@@ -1,15 +1,24 @@
 package com.nsu.to_letdhaka.Activities;
 
+import android.annotation.SuppressLint;
+import android.graphics.BitmapFactory;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.nsu.to_letdhaka.Domain.Ad;
 import com.nsu.to_letdhaka.R;
+
+import java.io.File;
+import java.io.IOException;
 
 public class AdDetailsActivity extends AppCompatActivity {
     private ImageView imageView;
@@ -33,18 +42,33 @@ public class AdDetailsActivity extends AppCompatActivity {
             }
         }
         bindWidgets();
-        prepareScreen();
+        try {
+            prepareScreen();
+        } catch (Exception e) {e.printStackTrace();}
     }
 
-    private void prepareScreen() {
-        Glide.with(this)
-                .load(storageReference)
-                .into(imageView);
-        month.setText(ad.getMonth());
-        rent.setText(ad.getRent());
-        category.setText(ad.getCategory());
+    @SuppressLint("SetTextI18n")
+    private void prepareScreen() throws IOException {
+        final File localFile = File.createTempFile("images", "jpg");
+        storageReference.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                // Local temp file has been created
+                imageView.setImageBitmap(BitmapFactory.decodeFile(localFile.getPath()));
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle any errors
+                Toast.makeText(AdDetailsActivity.this,"Failed image",Toast.LENGTH_LONG).show();
+            }
+        });
+        month.setText("Month\n" + ad.getMonth());
+        rent.setText("Rent\n"+ad.getRent());
+        category.setText("Category\n"+ad.getCategory());
         contactNo.setText(ad.getContactNo());
         address.setText(ad.getAddress());
+        Toast.makeText(AdDetailsActivity.this, ad.getAddress(), Toast.LENGTH_LONG).show();
     }
 
     private void bindWidgets() {
