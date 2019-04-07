@@ -149,12 +149,13 @@ public class MainActivity extends AppCompatActivity {
         // Create a new fragment and specify the fragment to show based on nav item clicked
         switch(menuItem.getItemId()) {
             case R.id.profile:
-                if(firebaseUser != null) {
-                    startActivity(new Intent(MainActivity.this, MyProfileActivity.class));
+                startActivity(new Intent(MainActivity.this, MyProfileActivity.class).putExtra("email","example@gmail.com"));
+                /*if(firebaseUser != null) {
+                    startActivity(new Intent(MainActivity.this, MyProfileActivity.class).putExtra("email",firebaseUser.getEmail()));
                 }
                 else{
                     Toast.makeText(MainActivity.this,"You are not logged in!",Toast.LENGTH_LONG).show();
-                }
+                }*/
                 break;
             case R.id.posts:
                 if(firebaseUser != null){

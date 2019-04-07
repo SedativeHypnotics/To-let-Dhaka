@@ -28,6 +28,7 @@ public class AdDetailsActivity extends AppCompatActivity {
     private TextView contactNo;
     private TextView address;
     private StorageReference storageReference;
+    @SuppressWarnings("FieldCanBeLocal")
     private FirebaseStorage firebaseStorage;
     private Ad ad;
 
@@ -68,7 +69,6 @@ public class AdDetailsActivity extends AppCompatActivity {
         category.setText("Category\n"+ad.getCategory());
         contactNo.setText(ad.getContactNo());
         address.setText(ad.getAddress());
-        Toast.makeText(AdDetailsActivity.this, ad.getAddress(), Toast.LENGTH_LONG).show();
     }
 
     private void bindWidgets() {

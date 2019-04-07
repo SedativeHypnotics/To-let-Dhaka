@@ -1,9 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activities.PostAdActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_margin="10dp"
+            android:src="@drawable/add_image"
+            tools:ignore="ContentDescription" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2.0">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/select_month"
+                android:textColor="#000000"
+                android:textSize="15sp"
+                android:labelFor="@id/select_month"
+                android:layout_marginStart="25dp"
+                />
+            <android.support.v7.widget.AppCompatSpinner
+                android:id="@+id/select_month"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:entries="@array/months"
+                android:layout_marginStart="25dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/select_month"
+                    android:textColor="#000000"
+                    android:textSize="15sp"
+                    android:labelFor="@id/select_month"
+                    android:layout_marginStart="25dp"
+                    />
+                <android.support.v7.widget.AppCompatSpinner
+                    android:id="@+id/select_room_for"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/room_for"
+                    android:layout_marginStart="25dp"/>
+            </LinearLayout>
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:text="@string/category"
+            android:labelFor="@id/category"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="10dp"
+            />
+        <android.support.v7.widget.AppCompatSpinner
+            android:id="@+id/category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/category"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="10dp"/>
+        <EditText
+            android:id="@+id/input_rent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:textColor="@color/black"
+            android:hint="@string/mess_rent"
+            android:inputType="numberDecimal"
+            tools:ignore="Autofill" />
+        <EditText
+            android:id="@+id/input_contact_no"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:textColor="@color/black"
+            android:hint="@string/phone_number"
+            android:inputType="phone"
+            tools:ignore="Autofill"/>
+        <EditText
+            android:id="@+id/input_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:textColor="@color/black"
+            android:hint="@string/location"
+            android:inputType="text"
+            tools:ignore="Autofill"/>
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@color/colorPrimaryDark"
+            android:text="@string/submit_post"/>
+    </LinearLayout>
 
-</android.support.constraint.ConstraintLayout>
+</ScrollView>
