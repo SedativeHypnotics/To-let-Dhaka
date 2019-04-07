@@ -1,5 +1,7 @@
 package com.nsu.to_letdhaka.Repository;
 
+import android.annotation.SuppressLint;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.TextView;
@@ -56,5 +58,32 @@ public class ProfileServerRepository implements ProfileRepository{
     @Override
     public void deleteProfile(Profile profile) {
 
+    }
+
+    public void setUserName(String email, final SharedPreferences sharedPreferences){
+        DocumentReference documentReference = db.collection(DB_COLLECTION_NAME).document(email);
+        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @SuppressLint("ApplySharedPref")
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    assert document != null;
+                    if (document.exists()) {
+                        Profile profile = document.toObject(Profile.class);
+                        if(profile == null){
+                            profile = new Profile("null","null","null");
+                        }
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("username",profile.getUsername());
+                        editor.commit();
+                    } else {
+                        Log.e("error","no document");
+                    }
+                } else {
+                    Log.e("error", Objects.requireNonNull(task.getException()).getMessage());
+                }
+            }
+        });
     }
 }

@@ -1,6 +1,7 @@
 package com.nsu.to_letdhaka.Service;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.widget.TextView;
 
 import com.nsu.to_letdhaka.Domain.Profile;
@@ -30,5 +31,9 @@ public class ProfileService {
 
     public void deleteProfile(Profile profile) {
         repository.deleteProfile(profile);
+    }
+
+    public void setUserName(String email, SharedPreferences sharedPreferences){
+        repository.setUserName(email,sharedPreferences);
     }
 }

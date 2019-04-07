@@ -70,13 +70,13 @@ public class AdServerRepository implements AdRepository{
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Log.i(LOG_TAG, "Card deleted successfully from FireStore: " + ad);
+                        Log.i(LOG_TAG, "Ad deleted successfully from FireStore: " + ad);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.e(LOG_TAG, "Failed to delete card: " + ad, e);
+                        Log.e(LOG_TAG, "Failed to delete Ad: " + ad, e);
                     }
                 });
     }
@@ -88,13 +88,13 @@ public class AdServerRepository implements AdRepository{
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Log.i(LOG_TAG, "Card saved successfully to FireStore: " + ad);
+                        Log.i(LOG_TAG, "Ad saved successfully to FireStore: " + ad);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.e(LOG_TAG, "Failed to save card: " + ad, e);
+                        Log.e(LOG_TAG, "Failed to save Ad: " + ad, e);
                     }
                 });
     }

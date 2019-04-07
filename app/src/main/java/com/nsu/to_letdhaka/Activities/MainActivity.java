@@ -1,6 +1,7 @@
 package com.nsu.to_letdhaka.Activities;
 
 import android.annotation.SuppressLint;
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,7 +12,10 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
@@ -20,6 +24,7 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.nsu.to_letdhaka.R;
+import com.nsu.to_letdhaka.Service.ProfileService;
 
 import java.util.Objects;
 
@@ -118,10 +123,27 @@ public class MainActivity extends AppCompatActivity {
         hostelButton = findViewById(R.id.hostel);
         flatButton = findViewById(R.id.flat);
         subletButton = findViewById(R.id.sub_let);
-        sharedPreferences = getPreferences(Context.MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences("shared_preference",Context.MODE_PRIVATE);
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
     }
-    
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.options_menu, menu);
+
+        SearchManager searchManager =
+                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView =
+                (SearchView) menu.findItem(R.id.search).getActionView();
+        assert searchManager != null;
+        searchView.setSearchableInfo(
+                searchManager.getSearchableInfo(getComponentName()));
+
+        return true;
+    }
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // The action bar home/up action should open or close the drawer.
@@ -149,21 +171,26 @@ public class MainActivity extends AppCompatActivity {
         // Create a new fragment and specify the fragment to show based on nav item clicked
         switch(menuItem.getItemId()) {
             case R.id.profile:
-                startActivity(new Intent(MainActivity.this, MyProfileActivity.class).putExtra("email","example@gmail.com"));
-                /*if(firebaseUser != null) {
+                if(firebaseUser != null) {
                     startActivity(new Intent(MainActivity.this, MyProfileActivity.class).putExtra("email",firebaseUser.getEmail()));
                 }
                 else{
                     Toast.makeText(MainActivity.this,"You are not logged in!",Toast.LENGTH_LONG).show();
-                }*/
+                }
                 break;
             case R.id.posts:
-                if(firebaseUser != null){
-                    startActivity(new Intent(MainActivity.this, MyAdsActivity.class));
-                }
-                else{
-                    startActivity(new Intent(MainActivity.this,LogInActivity.class).putExtra("activity","posts"));
-                }
+                ProfileService profileService = new ProfileService();
+                profileService.setUserName("example@gmail.com",sharedPreferences);
+                startActivity(new Intent(MainActivity.this,MyAdsActivity.class));
+//                if(firebaseUser != null){
+//                    ProfileService profileService = new ProfileService();
+//                    profileService.setUserName(firebaseUser.getEmail(),sharedPreferences);
+//                    startActivity(new Intent(MainActivity.this, MyAdsActivity.class));
+//                }
+//                else{
+//
+//                    startActivity(new Intent(MainActivity.this,LogInActivity.class));
+//                }
                 break;
             case R.id.post_ad:
                 if(firebaseUser != null){
@@ -188,4 +215,8 @@ public class MainActivity extends AppCompatActivity {
         mDrawer.closeDrawers();
     }
 
+    @Override
+    public void onBackPressed() {
+        finishAffinity();
+    }
 }

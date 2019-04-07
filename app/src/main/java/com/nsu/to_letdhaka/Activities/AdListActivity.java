@@ -1,6 +1,10 @@
 package com.nsu.to_letdhaka.Activities;
 
+import android.annotation.SuppressLint;
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.nsu.to_letdhaka.Domain.Ad;
 import com.nsu.to_letdhaka.R;
@@ -25,13 +30,43 @@ public class AdListActivity extends AppCompatActivity {
     private List<Ad> ads = new ArrayList<>();
 
     private RecyclerView adsRecyclerView;
+    private String query;
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
+    private String filter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ad_list);
+        bindWidgets();
+        handleIntent(getIntent());
         prepareListView();
     }
+
+    private void bindWidgets() {
+        sharedPreferences = getSharedPreferences("shared_preference",Context.MODE_PRIVATE);
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        handleIntent(intent);
+    }
+
+    @SuppressLint("ApplySharedPref")
+    private void handleIntent(Intent intent) {
+
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            query = intent.getStringExtra(SearchManager.QUERY);
+            //noinspection ConstantConditions
+            if(query != null && !query.equals("")){
+                editor = sharedPreferences.edit();
+                editor.putString("filter",query);
+                editor.commit();
+            }
+        }
+    }
+
 
     @Override
     protected void onStart() {
@@ -48,7 +83,18 @@ public class AdListActivity extends AppCompatActivity {
         adService.listAdsAsync(new AdRepository.OnResultListener<List<Ad>>() {
             @Override
             public void onResult(List<Ad> data) {
-                ads = data;
+                ads.clear();
+                filter = sharedPreferences.getString("filter",null);
+                if(filter != null) {
+                    for (Ad ad : data) {
+                        if (ad.eligibility(filter)) {
+                            ads.add(ad);
+                        }
+                    }
+                }
+                else{
+                    ads = data;
+                }
                 AdsListAdapter adapter = (AdsListAdapter) adsRecyclerView.getAdapter();
                 adapter.setAds(ads);
                 adapter.notifyDataSetChanged();
