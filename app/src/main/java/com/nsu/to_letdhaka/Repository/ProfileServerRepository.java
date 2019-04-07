@@ -7,6 +7,8 @@ import android.util.Log;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -51,8 +53,22 @@ public class ProfileServerRepository implements ProfileRepository{
     }
 
     @Override
-    public void addProfile(Profile profile) {
-
+    public void addProfile(final Profile profile) {
+        db.collection(DB_COLLECTION_NAME)
+                .document(profile.getEmail())
+                .set(profile)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.i(LOG_TAG, "Profile saved successfully to FireStore: " + profile);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.e(LOG_TAG, "Failed to save profile: " + profile, e);
+                    }
+                });
     }
 
     @Override

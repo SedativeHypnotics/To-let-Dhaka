@@ -175,29 +175,36 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(new Intent(MainActivity.this, MyProfileActivity.class).putExtra("email",firebaseUser.getEmail()));
                 }
                 else{
-                    Toast.makeText(MainActivity.this,"You are not logged in!",Toast.LENGTH_LONG).show();
+                    editor = sharedPreferences.edit();
+                    editor.putString("route","profile");
+                    editor.commit();
+                    startActivity(new Intent(MainActivity.this,LogInActivity.class));
                 }
                 break;
             case R.id.posts:
-                ProfileService profileService = new ProfileService();
-                profileService.setUserName("example@gmail.com",sharedPreferences);
-                startActivity(new Intent(MainActivity.this,MyAdsActivity.class));
-//                if(firebaseUser != null){
-//                    ProfileService profileService = new ProfileService();
-//                    profileService.setUserName(firebaseUser.getEmail(),sharedPreferences);
-//                    startActivity(new Intent(MainActivity.this, MyAdsActivity.class));
-//                }
-//                else{
-//
-//                    startActivity(new Intent(MainActivity.this,LogInActivity.class));
-//                }
+                if(firebaseUser != null){
+                    ProfileService profileService = new ProfileService();
+                    profileService.setUserName(firebaseUser.getEmail(),sharedPreferences);
+                    startActivity(new Intent(MainActivity.this, MyAdsActivity.class));
+                }
+                else{
+                    editor = sharedPreferences.edit();
+                    editor.putString("route","posts");
+                    editor.commit();
+                    startActivity(new Intent(MainActivity.this,LogInActivity.class));
+                }
                 break;
             case R.id.post_ad:
                 if(firebaseUser != null){
+                    ProfileService profileService = new ProfileService();
+                    profileService.setUserName(firebaseUser.getEmail(),sharedPreferences);
                     startActivity(new Intent(MainActivity.this, PostAdActivity.class));
                 }
                 else{
-                    startActivity(new Intent(MainActivity.this,LogInActivity.class).putExtra("activity","post_ad"));
+                    editor = sharedPreferences.edit();
+                    editor.putString("route","post_ad");
+                    editor.commit();
+                    startActivity(new Intent(MainActivity.this,LogInActivity.class));
                 }
                 break;
             case R.id.log_out:

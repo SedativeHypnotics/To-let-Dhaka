@@ -153,4 +153,9 @@ public class MyAdsActivity extends AppCompatActivity {
             address = view.findViewById(R.id.address);
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(MyAdsActivity.this,MainActivity.class));
+    }
 }

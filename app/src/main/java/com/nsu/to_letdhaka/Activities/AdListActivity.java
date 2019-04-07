@@ -58,6 +58,7 @@ public class AdListActivity extends AppCompatActivity {
 
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             query = intent.getStringExtra(SearchManager.QUERY);
+            setTitle(getString(R.string.app_name)+"("+query+")");
             //noinspection ConstantConditions
             if(query != null && !query.equals("")){
                 editor = sharedPreferences.edit();

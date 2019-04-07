@@ -1,6 +1,7 @@
 package com.nsu.to_letdhaka.Activities;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
@@ -18,6 +19,7 @@ public class MyProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_profile);
+        setTitle("Profile");
         if(getIntent().getExtras() != null){
             Object email = getIntent().getExtras().get("email");
             if(email != null){
@@ -39,5 +41,10 @@ public class MyProfileActivity extends AppCompatActivity {
     private void bindWidgets() {
         username = findViewById(R.id.username_view);
         emailView = findViewById(R.id.email_view);
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(MyProfileActivity.this,MainActivity.class));
     }
 }

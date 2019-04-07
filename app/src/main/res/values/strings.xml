@@ -28,6 +28,9 @@
     <string name="sign_up">Sign Up</string>
     <string name="search_title">Search for ads...</string>
     <string name="search_hint">Search for ads...</string>
+    <string name="username">Username</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="error">A problem occured!</string>
     <string-array name="category">
         <item>Mess</item>
         <item>Hostel</item>
