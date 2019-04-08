@@ -14,7 +14,7 @@
     <string name="logout">Log out</string>
     <string name="add_image">Add Image</string>
     <string name="select_month">Select Month</string>
-    <string name="mess_rent">Mess Rent</string>
+    <string name="mess_rent">Rent</string>
     <string name="phone_number">Phone Number</string>
     <string name="location">Location</string>
     <string name="category">Category</string>
@@ -30,7 +30,7 @@
     <string name="search_hint">Search for ads...</string>
     <string name="username">Username</string>
     <string name="confirm_password">Confirm Password</string>
-    <string name="error">A problem occured!</string>
+    <string name="error">A problem occurred!</string>
     <string name="select_room_for">Select Room For</string>
     <string name="post_ad">Post Ad</string>
     <string name="remove_ad">Delete</string>
