@@ -83,7 +83,7 @@ public class AdServerRepository implements AdRepository{
 
     private void saveAd(final Ad ad) {
         db.collection(DB_COLLECTION_NAME)
-                .document(ad.getNumber())
+                .document(Integer.toString(ad.hashCode()))
                 .set(ad)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override

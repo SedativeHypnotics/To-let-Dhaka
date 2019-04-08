@@ -9,7 +9,7 @@
             android:title="@string/posts"/>
         <item android:id="@+id/post_ad"
             android:icon="@android:drawable/ic_input_add"
-            android:title="@string/profile"/>
+            android:title="@string/post_ad"/>
     </group>
     <group android:checkableBehavior="single">
         <item android:id="@+id/log_out"
