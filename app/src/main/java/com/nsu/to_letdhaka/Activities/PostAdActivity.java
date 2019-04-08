@@ -48,7 +48,6 @@ public class PostAdActivity extends AppCompatActivity {
     private ImageView imageView;
     private String filename;
     private Uri fileUri;
-    private ProgressDialog progressDialog;
     private Toolbar toolbar;
 
     private static final String TAG = "PostAdActivity";
@@ -99,8 +98,6 @@ public class PostAdActivity extends AppCompatActivity {
     }
 
     private void uploadAd() {
-        progressDialog.setTitle("Uploading Ad...");
-        progressDialog.show();
         Ad ad = new Ad();
         ad.setAddress(location.getText().toString());
         ad.setNumber("1");
@@ -135,7 +132,7 @@ public class PostAdActivity extends AppCompatActivity {
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                progressDialog.dismiss();
+                finish();
             }
         });
     }
@@ -151,7 +148,6 @@ public class PostAdActivity extends AppCompatActivity {
         sharedPreferences = getSharedPreferences("shared_preference",MODE_PRIVATE);
         submitButton = findViewById(R.id.submit);
         imageView = findViewById(R.id.input_image);
-        progressDialog = new ProgressDialog(this);
     }
 
     private boolean validate(EditText[] editTexts){
