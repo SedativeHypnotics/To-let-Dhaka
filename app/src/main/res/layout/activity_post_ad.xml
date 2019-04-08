@@ -48,10 +48,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/select_month"
+                    android:text="@string/select_room_for"
                     android:textColor="#000000"
                     android:textSize="15sp"
-                    android:labelFor="@id/select_month"
+                    android:labelFor="@id/select_room_for"
                     android:layout_marginStart="25dp"
                     />
                 <android.support.v7.widget.AppCompatSpinner
@@ -67,12 +67,12 @@
             android:layout_height="wrap_content"
             android:textColor="@color/black"
             android:text="@string/category"
-            android:labelFor="@id/category"
+            android:labelFor="@id/select_category"
             android:layout_marginStart="25dp"
             android:layout_marginTop="10dp"
             />
         <android.support.v7.widget.AppCompatSpinner
-            android:id="@+id/category"
+            android:id="@+id/select_category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:entries="@array/category"
@@ -111,6 +111,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:background="@color/colorPrimaryDark"
+            android:textColor="@color/white"
             android:text="@string/submit_post"/>
     </LinearLayout>
 
