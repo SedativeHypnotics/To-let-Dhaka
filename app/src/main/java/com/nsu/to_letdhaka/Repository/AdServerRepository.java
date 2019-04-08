@@ -65,7 +65,7 @@ public class AdServerRepository implements AdRepository{
     @Override
     public void deleteAd(final Ad ad) {
         db.collection(DB_COLLECTION_NAME)
-                .document(ad.getNumber())
+                .document(Integer.toString(ad.hashCode()))
                 .delete()
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
