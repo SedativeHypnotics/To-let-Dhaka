@@ -7,6 +7,10 @@
     tools:context=".Activities.AdDetailsActivity"
     android:orientation="vertical"
     android:weightSum="1.0">
+    <include
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
     <ImageView
         android:id="@+id/image_view"
         android:layout_width="match_parent"

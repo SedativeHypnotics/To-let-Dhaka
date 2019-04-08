@@ -10,8 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".Activities.PasswordRetrievalEmailSuccessful"></activity>
-        <activity android:name=".Activities.RetrievePassword" />
+        <activity android:name=".Activities.PasswordRetrievalEmailSuccessful"
+            tools:ignore="InnerclassSeparator"/>
+        <activity android:name=".Activities.RetrievePassword"
+            tools:ignore="InnerclassSeparator"
+            android:theme="@style/NoBar"/>
 
         <meta-data
             android:name="android.app.default_searchable"
@@ -19,10 +22,12 @@
 
         <activity
             android:name=".Activities.PostAdActivity"
-            tools:ignore="InnerclassSeparator" />
+            tools:ignore="InnerclassSeparator"
+            android:theme="@style/NoBar"/>
         <activity
             android:name=".Activities.AdListActivity"
-            tools:ignore="InnerclassSeparator">
+            tools:ignore="InnerclassSeparator"
+            android:theme="@style/NoBar">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
@@ -33,19 +38,24 @@
         </activity>
         <activity
             android:name=".Activities.MyAdsActivity"
-            tools:ignore="InnerclassSeparator" />
+            tools:ignore="InnerclassSeparator"
+            android:theme="@style/NoBar"/>
         <activity
             android:name=".Activities.AdDetailsActivity"
-            tools:ignore="InnerclassSeparator" />
+            tools:ignore="InnerclassSeparator"
+            android:theme="@style/NoBar"/>
         <activity
             android:name=".Activities.MyProfileActivity"
-            tools:ignore="InnerclassSeparator" />
+            tools:ignore="InnerclassSeparator"
+            android:theme="@style/NoBar"/>
         <activity
             android:name=".Activities.LogInActivity"
-            tools:ignore="InnerclassSeparator" />
+            tools:ignore="InnerclassSeparator"
+            android:theme="@style/NoBar"/>
         <activity
             android:name=".Activities.SignUpActivity"
-            tools:ignore="InnerclassSeparator" />
+            tools:ignore="InnerclassSeparator"
+            android:theme="@style/NoBar"/>
         <activity
             android:name=".Activities.MainActivity"
             android:theme="@style/NoBar"

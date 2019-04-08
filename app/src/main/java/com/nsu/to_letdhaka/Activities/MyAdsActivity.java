@@ -5,10 +5,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -28,11 +31,23 @@ public class MyAdsActivity extends AppCompatActivity {
     private RecyclerView adsRecyclerView;
     private SharedPreferences sharedPreferences;
     private String filter;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ad_list);
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         bindWidgets();
         prepareListView();
     }
@@ -153,6 +168,13 @@ public class MyAdsActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(MyAdsActivity.this,MainActivity.class));
+        String currentActivity = sharedPreferences.getString("current_activity",null);
+        assert currentActivity != null;
+        if(currentActivity.equals("login")){
+            startActivity(new Intent(MyAdsActivity.this,MainActivity.class));
+        }
+        else{
+            finish();
+        }
     }
 }

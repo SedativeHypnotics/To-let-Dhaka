@@ -172,6 +172,9 @@ public class MainActivity extends AppCompatActivity {
         switch(menuItem.getItemId()) {
             case R.id.profile:
                 if(firebaseUser != null) {
+                    editor = sharedPreferences.edit();
+                    editor.putString("current_activity","main_activity");
+                    editor.commit();
                     startActivity(new Intent(MainActivity.this, MyProfileActivity.class).putExtra("email",firebaseUser.getEmail()));
                 }
                 else{
@@ -185,6 +188,9 @@ public class MainActivity extends AppCompatActivity {
                 if(firebaseUser != null){
                     ProfileService profileService = new ProfileService();
                     profileService.setUserName(firebaseUser.getEmail(),sharedPreferences);
+                    editor = sharedPreferences.edit();
+                    editor.putString("current_activity","main_activity");
+                    editor.commit();
                     startActivity(new Intent(MainActivity.this, MyAdsActivity.class));
                 }
                 else{
@@ -198,6 +204,9 @@ public class MainActivity extends AppCompatActivity {
                 if(firebaseUser != null){
                     ProfileService profileService = new ProfileService();
                     profileService.setUserName(firebaseUser.getEmail(),sharedPreferences);
+                    editor = sharedPreferences.edit();
+                    editor.putString("current_activity","main_activity");
+                    editor.commit();
                     startActivity(new Intent(MainActivity.this, PostAdActivity.class));
                 }
                 else{
@@ -210,6 +219,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.log_out:
                 if(firebaseUser != null) {
                     FirebaseAuth.getInstance().signOut();
+                    firebaseUser = null;
                     Toast.makeText(MainActivity.this, "log out", Toast.LENGTH_LONG).show();
                 }
                 else{

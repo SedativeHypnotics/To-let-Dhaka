@@ -6,8 +6,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,19 +31,31 @@ public class LogInActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private TextView signUp,recoverPassword;
     private SharedPreferences sharedPreferences;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
         setTitle("Log In");
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         bindWidgets();
         bindListeners();
     }
 
     private void bindWidgets() {
-        email = findViewById(R.id.logInEmail);
-        password = findViewById(R.id.sign_up_Password);
+        email = findViewById(R.id.email_value);
+        password = findViewById(R.id.password_value);
         loginButton = findViewById(R.id.email_sign_in);
         signUp = findViewById(R.id.signUp);
         recoverPassword = findViewById(R.id.recover_password);
@@ -88,7 +103,12 @@ public class LogInActivity extends AppCompatActivity {
                             FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
                             assert firebaseUser != null;
                             profileService.setUserName(firebaseUser.getEmail(),sharedPreferences);
+                            //Toast.makeText(LogInActivity.this, firebaseUser.getEmail(), Toast.LENGTH_SHORT).show();
                             String route = sharedPreferences.getString("route",null);
+                            SharedPreferences.Editor editor;
+                            editor = sharedPreferences.edit();
+                            editor.putString("current_activity","login");
+                            editor.commit();
                             assert route != null;
                             if(route.equals("post")) {
                                 startActivity(new Intent(LogInActivity.this, MyAdsActivity.class));
@@ -97,6 +117,7 @@ public class LogInActivity extends AppCompatActivity {
                                 startActivity(new Intent(LogInActivity.this, PostAdActivity.class));
                             }
                             else{
+                                Toast.makeText(LogInActivity.this, firebaseUser.getEmail(), Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(LogInActivity.this, MyProfileActivity.class).putExtra("email",firebaseUser.getEmail()));
                             }
                         }
