@@ -26,7 +26,7 @@ public class LogInActivity extends AppCompatActivity {
     private EditText email,password;
     private Button loginButton;
     private ProgressDialog progressDialog;
-    private TextView signUp;
+    private TextView signUp,recoverPassword;
     private SharedPreferences sharedPreferences;
 
     @Override
@@ -43,6 +43,7 @@ public class LogInActivity extends AppCompatActivity {
         password = findViewById(R.id.sign_up_Password);
         loginButton = findViewById(R.id.email_sign_in);
         signUp = findViewById(R.id.signUp);
+        recoverPassword = findViewById(R.id.recover_password);
         progressDialog = new ProgressDialog(this);
         sharedPreferences = getSharedPreferences("shared_preference",MODE_PRIVATE);
     }
@@ -63,6 +64,13 @@ public class LogInActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(LogInActivity.this,SignUpActivity.class));
+            }
+        });
+
+        recoverPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(LogInActivity.this,RetrievePassword.class));
             }
         });
     }

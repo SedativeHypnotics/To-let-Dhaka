@@ -38,6 +38,10 @@
     <string name="delete_card_confirmation_message">Are you sure to delete this ad?</string>
     <string name="delete">delete</string>
     <string name="cancel">cancel</string>
+    <string name="enter_your_account_email">Enter the email associated with the account</string>
+    <string name="send_recovery_email">send recovery email</string>
+    <string name="recovery_success">A recovery email has been sent to your email address</string>
+    <string name="back_to_homepage">Back to homepage</string>
     <string-array name="category">
         <item>Mess</item>
         <item>Hostel</item>

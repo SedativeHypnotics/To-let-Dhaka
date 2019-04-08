@@ -10,21 +10,26 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+        <activity android:name=".Activities.PasswordRetrievalEmailSuccessful"></activity>
+        <activity android:name=".Activities.RetrievePassword" />
+
         <meta-data
             android:name="android.app.default_searchable"
             android:value=".Activities.AdListActivity" />
-        <activity android:name=".Activities.PostAdActivity"
-            tools:ignore="InnerclassSeparator"/>
+
+        <activity
+            android:name=".Activities.PostAdActivity"
+            tools:ignore="InnerclassSeparator" />
         <activity
             android:name=".Activities.AdListActivity"
-            tools:ignore="InnerclassSeparator" >
+            tools:ignore="InnerclassSeparator">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
+
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
-
         </activity>
         <activity
             android:name=".Activities.MyAdsActivity"
@@ -45,7 +50,8 @@
             android:name=".Activities.MainActivity"
             android:theme="@style/NoBar"
             tools:ignore="InnerclassSeparator">
-            <meta-data android:name="android.app.searchable"
+            <meta-data
+                android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
         <activity
